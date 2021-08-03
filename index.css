@@ -11,3 +11,14 @@
 ul {
   list-style: none;
 }
+
+img {
+  border-radius: 50%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}

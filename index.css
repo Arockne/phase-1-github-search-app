@@ -12,6 +12,16 @@ ul {
   list-style: none;
 }
 
+#user-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#user-list li {
+  width: 25%;
+}
+
 img {
   border-radius: 50%;
   width: 50%;

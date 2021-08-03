@@ -7,7 +7,6 @@
     const form = document.querySelector('#github-form');
     form.addEventListener('submit', searchResult)
   }
-  search();
   
   function searchResult(e) {
     e.preventDefault();
@@ -97,3 +96,5 @@ function displayRepo(repo) {
 
   document.querySelector('#repos-list').appendChild(li);
 }
+
+search();

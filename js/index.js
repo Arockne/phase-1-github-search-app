@@ -50,6 +50,7 @@ function displayUser(user) {
   link.textContent = 'Github Page';
 
   const li = document.createElement('li');
+  li.className = 'card';
   li.append(h2, img, link);
 
   document.querySelector('#user-list').appendChild(li);
@@ -58,7 +59,13 @@ function displayUser(user) {
 function getRepo(e) {
   removeCurrentRepo();
   const user = e.target.id;
-  fetch(`https://api.github.com/users/${user}/repos`)
+  fetch(`https://api.github.com/users/${user}/repos`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/vnd.github.v3+json'
+    }
+  })
   .then(resp => resp.json())
   .then(repo => console.log(repo));
 }
@@ -74,8 +81,15 @@ function removeCurrentRepo() {
 }
 
 function displayRepo(repo) {
-  //html_url
-  //name
+  const link = document.createElement('a');
+  link.href = repo.html_url;
+  link.textContent = repo.name
+  link.target - '_blank';
+
+  const li = document.createElement('li');
+  li.appendChild(link);
+
+  document.querySelector('#repos-list').appendChild(li);
 }
 
 //using the results of the search

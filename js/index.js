@@ -37,12 +37,13 @@
 }
 
 function displayUser(user) {
-
   const h2 = document.createElement('h2');
   h2.textContent = user.login;
 
   const img = document.createElement('img');
   img.src = user.avatar_url
+  img.id = user.login;
+  img.addEventListener('click', getRepo)
 
   const link = document.createElement('a');
   link.href = user.html_url;
@@ -54,6 +55,16 @@ function displayUser(user) {
   document.querySelector('#user-list').appendChild(li);
 }
 
+function getRepo(e) {
+  const user = e.target.id;
+  fetch(`https://api.github.com/users/${user}/repos`)
+  .then(resp => resp.json())
+  .then(repo => console.log(repo));
+}
+
+function displayRepo(repo) {
+  
+}
 
 //using the results of the search
   //display information about the users to the page

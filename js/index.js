@@ -56,14 +56,26 @@ function displayUser(user) {
 }
 
 function getRepo(e) {
+  removeCurrentRepo();
   const user = e.target.id;
   fetch(`https://api.github.com/users/${user}/repos`)
   .then(resp => resp.json())
   .then(repo => console.log(repo));
 }
 
+function removeCurrentRepo() {
+  const repoList = document.querySelector('#repos-list');
+  const newRepoList = document.createElement('ul');
+  newRepoList.id = 'repos-list';
+  if (repoList.children.length > 0) {
+    repoList.remove();
+    document.querySelector('github-container').appendChild(newRepoList);
+  }
+}
+
 function displayRepo(repo) {
-  
+  //html_url
+  //name
 }
 
 //using the results of the search

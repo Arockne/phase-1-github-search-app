@@ -11,14 +11,8 @@
   
   function searchResult(e) {
     e.preventDefault();
-    document.querySelector('#user-list').remove();
-    
-    const ul = document.createElement('ul');
-    ul.id = 'user-list';
-    
-    const githubContainer = document.querySelector('#github-container');
-    githubContainer.prepend(ul);
-    
+    removeCurrentSearch();
+ 
     const search = e.target.querySelector('#search').value;
     getUser(search);
     this.reset();
@@ -35,6 +29,16 @@
   .then(resp => resp.json())
   .then(search => search.items.forEach(displayUser))
   .catch(err => console.log(err));
+}
+
+function removeCurrentSearch() {
+  const currentSearch = document.querySelector('#user-list');
+  if (currentSearch.children.length > 0) {
+    const newSearch = document.createElement('ul');
+    newSearch.id = 'user-list';
+    currentSearch.remove();
+    document.querySelector('#github-container').prepend(newSearch);
+  }
 }
 
 function displayUser(user) {
@@ -74,9 +78,9 @@ function getRepo(e) {
 
 function removeCurrentRepo() {
   const repoList = document.querySelector('#repos-list');
-  const newRepoList = document.createElement('ul');
-  newRepoList.id = 'repos-list';
   if (repoList.children.length > 0) {
+    const newRepoList = document.createElement('ul');
+    newRepoList.id = 'repos-list';
     repoList.remove();
     document.querySelector('#github-container').appendChild(newRepoList);
   }
@@ -93,13 +97,3 @@ function displayRepo(repo) {
 
   document.querySelector('#repos-list').appendChild(li);
 }
-
-//using the results of the search
-  //display information about the users to the page
-
-//clicking on one of these users
-  //should send a request using user Repos endpoint
-  //return all the data about the repositories for that user
-  
-//using the response for the user repos
-  //display all the repositories for that user on the page

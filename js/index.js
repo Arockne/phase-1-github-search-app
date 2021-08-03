@@ -33,7 +33,8 @@
     }
   })
   .then(resp => resp.json())
-  .then(search => search.items.forEach(displayUser));
+  .then(search => search.items.forEach(displayUser))
+  .catch(err => console.log(err));
 }
 
 function displayUser(user) {
@@ -67,7 +68,8 @@ function getRepo(e) {
     }
   })
   .then(resp => resp.json())
-  .then(repo => console.log(repo));
+  .then(repos => repos.forEach(displayRepo))
+  .catch(err => document.querySelector('#repos-list').textContent(err.message));
 }
 
 function removeCurrentRepo() {
@@ -76,7 +78,7 @@ function removeCurrentRepo() {
   newRepoList.id = 'repos-list';
   if (repoList.children.length > 0) {
     repoList.remove();
-    document.querySelector('github-container').appendChild(newRepoList);
+    document.querySelector('#github-container').appendChild(newRepoList);
   }
 }
 
